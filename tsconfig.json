@@ -1,21 +1,62 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "useDefineForClassFields": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "strict": true,
     "jsx": "preserve",
-    "sourceMap": true,
-    "resolveJsonModule": true,
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ],
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "isolatedModules": false,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
+    "types": [
+      "node",
+      "unplugin-vue-router/client"
+    ],
+    "allowJs": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "importHelpers": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "verbatimModuleSyntax": true,
     "skipLibCheck": true,
-    "outDir": "dist/electron"
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "noEmit": true
   },
-  "include": ["src/electron/**/*"],
-  "references": [{
-    "path": "./tsconfig.node.json"
-  }]
+  "include": [
+    "src/electron/**/*",
+    "src/App.vue",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx",
+    "src/components.d.ts",
+    "src/auto-imports.d.ts",
+    "src/typed-router.d.ts",
+    "src/global.d.ts",
+    "tests/*.ts",
+    "src/stores/game.js",
+    "src/utils/controlAndoirdLiveChat.js",
+    "src/utils/index.js",
+    "src/stores/user.ts",
+    "src/utils/request.ts"
+  ]
 }

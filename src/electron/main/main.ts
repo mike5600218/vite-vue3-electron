@@ -1,12 +1,11 @@
-import { join } from 'path';
+import path from 'path';
 import {
     app,
     BrowserWindow,
     ipcMain,
     dialog
 } from 'electron';
-
-const isDev = process.env.npm_lifecycle_event === "app:dev" ? true : false;
+const isDev = !app.isPackaged ? true : false;
 
 async function handleFileOpen() {
     const { canceled, filePaths } = await dialog.showOpenDialog({ title: "Open File" })
@@ -20,17 +19,23 @@ function createWindow() {
     const mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
+        autoHideMenuBar: true,
         webPreferences: {
-            preload: join(__dirname, '../preload/preload.js'),
+            devTools: isDev ? true : false, // ❌ 禁用开发者工具
+            // preload: join(__dirname, 'preload.js'),
+            contextIsolation: true, // ✅ 必须开启
+            nodeIntegration: true, // 🚫 禁用 Node.js API 访问
         },
     });
 
     // and load the index.html of the app.
     if (isDev) {
-        mainWindow.loadURL('http://localhost:3000');// Open the DevTools.
+        mainWindow.loadURL('http://localhost:3000');
         mainWindow.webContents.openDevTools();
     } else {
-        mainWindow.loadFile(join(__dirname, '../../index.html'));
+        // **确保正确加载 HTML**
+        const indexPath = path.join(__dirname, '../dist-electron/index.html');
+        mainWindow.loadFile(indexPath);
     }
     // mainWindow.loadURL( //this doesn't work on macOS in build and preview mode
     //     isDev ?
