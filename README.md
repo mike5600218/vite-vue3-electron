@@ -269,3 +269,5 @@ npm run app:build
 ### 2023/04/12: add an example of how to load image from `assets` in components (Home and About page)
 ### 2023/07/31: add an example of how to use `showOpenDialog` in electron.
 ### 2024/02/31: fixed the issue of refreshing the white screen on the desktop
+### 2024/04/31: fixed packaging and previewing
+
