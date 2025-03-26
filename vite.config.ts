@@ -98,6 +98,16 @@ export default defineConfig((modeObj) => {
       chunkSizeWarningLimit: 1500,
       emptyOutDir: true, // 每次构建时清空目录
       rollupOptions: {
+        external: [
+          // 忽略 electron 相关模块
+          'electron',
+          'fs',
+          'path',
+          'os',
+        ],
+        input: {
+          main: 'src/main.ts', // 入口文件
+        },
         output: {
           // 最小化拆分包
           manualChunks(id) {
@@ -118,7 +128,8 @@ export default defineConfig((modeObj) => {
             return `static/js/${fileName}/[name].[hash].js`;
           },
         }
-      }
+      },
+      exclude: ['src/electron/**']
     }
   }
 })
